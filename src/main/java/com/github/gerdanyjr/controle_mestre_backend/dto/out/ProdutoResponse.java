@@ -11,7 +11,7 @@ public record ProdutoResponse(
         String nome,
         int quantidadeMnima,
         String marca,
-        Categoria categoria,
+        Long categoriaId,
         int quantidade,
         BigDecimal valor
 ) {

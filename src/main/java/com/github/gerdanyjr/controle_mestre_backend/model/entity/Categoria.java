@@ -7,12 +7,12 @@ import jakarta.persistence.*;
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false, length = 50)
     private String nome;
 
-    public Categoria(Integer id, String nome) {
+    public Categoria(Long id, String nome) {
         this.id = id;
         this.nome = nome;
     }
@@ -20,11 +20,11 @@ public class Categoria {
     public Categoria() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
