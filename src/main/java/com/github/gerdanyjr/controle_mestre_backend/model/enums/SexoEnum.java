@@ -25,6 +25,6 @@ public enum SexoEnum {
     }
 
     public static SexoEnum fromCodigo(int codigo) {
-        return map.get(codigo);
+        return map.getOrDefault(codigo, NAO_ESPECIFICADO);
     }
 }

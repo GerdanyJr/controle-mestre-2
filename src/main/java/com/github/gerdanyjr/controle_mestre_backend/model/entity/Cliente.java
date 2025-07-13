@@ -12,7 +12,9 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cpf", nullable = false, length = 11)
+    private Long id;
+
+    @Column(name = "cpf", unique = true, nullable = false, length = 11)
     private String cpf;
 
     @Column(name = "nome", nullable = false, length = 50)
@@ -28,11 +30,20 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String cpf, String nome, SexoEnum sexo, LocalDate dataNascimento) {
+    public Cliente(Long id, String cpf, String nome, SexoEnum sexo, LocalDate dataNascimento) {
+        this.id = id;
         this.cpf = cpf;
         this.nome = nome;
         this.sexo = sexo;
         this.dataNascimento = dataNascimento;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCpf() {
