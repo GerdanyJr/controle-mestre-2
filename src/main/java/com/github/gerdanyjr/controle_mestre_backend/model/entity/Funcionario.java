@@ -1,15 +1,15 @@
 package com.github.gerdanyjr.controle_mestre_backend.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "funcionario")
 public class Funcionario {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(unique = true, nullable = false, length = 11)
     private String cpf;
 
@@ -31,13 +31,22 @@ public class Funcionario {
     public Funcionario() {
     }
 
-    public Funcionario(String cpf, String email, String telefone, String nome, String apelido, Integer cargo) {
+    public Funcionario(Long id, String cpf, String email, String telefone, String nome, String apelido, Integer cargo) {
+        this.id = id;
         this.cpf = cpf;
         this.email = email;
         this.telefone = telefone;
         this.nome = nome;
         this.apelido = apelido;
         this.cargo = cargo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCpf() {
