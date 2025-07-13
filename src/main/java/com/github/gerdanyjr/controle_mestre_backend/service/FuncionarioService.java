@@ -6,6 +6,7 @@ import com.github.gerdanyjr.controle_mestre_backend.dto.out.FuncionarioResponse;
 import com.github.gerdanyjr.controle_mestre_backend.model.entity.Funcionario;
 import com.github.gerdanyjr.controle_mestre_backend.repository.IFuncionarioRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class FuncionarioService {
         this.funcionarioAdapter = funcionarioAdapter;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public FuncionarioResponse createFuncionario(FuncionarioRequest funcionarioRequest) {
         verifyFuncionarioNotExists(funcionarioRequest.cpf());
 
@@ -32,6 +34,7 @@ public class FuncionarioService {
         return funcionarioAdapter.toResponse(funcionario);
     }
 
+    @Transactional(readOnly = true)
     public List<FuncionarioResponse> findAllFuncionarios() {
         List<Funcionario> funcionarios = funcionarioRepository.findAll();
 
@@ -41,6 +44,7 @@ public class FuncionarioService {
                 .toList();
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public void deleteFuncionario(Long id) {
         Funcionario funcionario = funcionarioRepository
                 .findById(id)

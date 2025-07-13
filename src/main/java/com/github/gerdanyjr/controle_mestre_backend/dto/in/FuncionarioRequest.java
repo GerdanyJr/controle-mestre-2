@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;
 
+@Schema(description = "DTO para cadastro de funcionários")
 public record FuncionarioRequest(
         @CPF(message = "Formato de CPF inválido!")
         @Schema(description = "CPF do funcionário", example = "12345678909")

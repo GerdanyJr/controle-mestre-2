@@ -6,6 +6,7 @@ import com.github.gerdanyjr.controle_mestre_backend.dto.out.ClienteResponse;
 import com.github.gerdanyjr.controle_mestre_backend.model.entity.Cliente;
 import com.github.gerdanyjr.controle_mestre_backend.repository.IClienteRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class ClienteService {
         this.clienteAdapter = clienteAdapter;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public ClienteResponse create(ClienteRequest clienteRequest) {
         verifyCpfNotExists(clienteRequest.cpf());
         Cliente cliente = clienteAdapter.toEntity(clienteRequest);
@@ -30,6 +32,7 @@ public class ClienteService {
         return clienteAdapter.toResponse(created);
     }
 
+    @Transactional(readOnly = true)
     public List<ClienteResponse> findAll() {
         List<Cliente> clientes = clienteRepository.findAll();
 
@@ -39,6 +42,7 @@ public class ClienteService {
                 .toList();
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Long id) {
         Cliente foundCliente = clienteRepository
                 .findById(id)
