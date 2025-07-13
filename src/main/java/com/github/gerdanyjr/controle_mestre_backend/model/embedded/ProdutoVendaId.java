@@ -2,42 +2,55 @@ package com.github.gerdanyjr.controle_mestre_backend.model.embedded;
 
 import com.github.gerdanyjr.controle_mestre_backend.model.entity.Produto;
 import com.github.gerdanyjr.controle_mestre_backend.model.entity.Venda;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 
+import java.util.Objects;
+
 @Embeddable
 public class ProdutoVendaId {
 
-    @ManyToOne
-    @MapsId("id_venda")
-    private Venda venda;
+    @Column(name = "venda_id")
+    private Long vendaId;
 
-    @ManyToOne
-    @MapsId("id_produto")
-    private Produto produto;
+    @Column(name = "produto_id")
+    private Long produtoId;
 
     public ProdutoVendaId() {
     }
 
-    public ProdutoVendaId(Venda venda, Produto produto) {
-        this.venda = venda;
-        this.produto = produto;
+    public ProdutoVendaId(Long vendaId, Long produtoId) {
+        this.vendaId = vendaId;
+        this.produtoId = produtoId;
     }
 
-    public Venda getVenda() {
-        return venda;
+    public Long getVendaId() {
+        return vendaId;
     }
 
-    public void setVenda(Venda venda) {
-        this.venda = venda;
+    public void setVendaId(Long vendaId) {
+        this.vendaId = vendaId;
     }
 
-    public Produto getProduto() {
-        return produto;
+    public Long getProdutoId() {
+        return produtoId;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+    public void setProdutoId(Long produtoId) {
+        this.produtoId = produtoId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ProdutoVendaId that = (ProdutoVendaId) o;
+        return Objects.equals(vendaId, that.vendaId) && Objects.equals(produtoId, that.produtoId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(vendaId, produtoId);
     }
 }

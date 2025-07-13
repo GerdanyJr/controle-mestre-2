@@ -6,6 +6,7 @@ import com.github.gerdanyjr.controle_mestre_backend.service.ProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/produtos")
+@Tag(name = "Produtos", description = "Operações relacionadas a produtos")
 public class ProdutoController {
     private final ProdutoService produtoService;
 
@@ -24,8 +26,8 @@ public class ProdutoController {
 
     @PostMapping
     @Operation(description = "Cadastrar um produto", responses = {
-            @ApiResponse(responseCode = "200", description = "Produto cadastrado com sucesso!"),
-            @ApiResponse(responseCode = "404", description = "Categoria não encontrada!")
+            @ApiResponse(responseCode = "201", description = "Produto cadastrado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Categoria não encontrada")
     })
     public ResponseEntity<ProdutoResponse> cadastrarProduto(@RequestBody @Valid ProdutoRequest request) {
         return ResponseEntity
@@ -34,7 +36,7 @@ public class ProdutoController {
     }
 
     @GetMapping
-    @Operation(description = "Produtos retornados com sucesso", responses = {
+    @Operation(description = "Listar todos os produtos", responses = {
             @ApiResponse(responseCode = "200", description = "Produtos retornados com sucesso")
     })
     public ResponseEntity<List<ProdutoResponse>> listarProdutos() {
@@ -42,6 +44,10 @@ public class ProdutoController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(description = "Deletar um produto", responses = {
+            @ApiResponse(responseCode = "204", description = "Produto deletado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Produto não encontrado")
+    })
     public ResponseEntity<Void> deletarProduto(
             @PathVariable @Parameter(description = "Id do produto a ser deletado") Long id
     ) {

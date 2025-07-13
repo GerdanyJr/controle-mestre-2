@@ -1,7 +1,7 @@
 package com.github.gerdanyjr.controle_mestre_backend.service;
 
-import com.github.gerdanyjr.controle_mestre_backend.dto.in.ProdutoRequest;
 import com.github.gerdanyjr.controle_mestre_backend.dto.adapter.ProdutoAdapter;
+import com.github.gerdanyjr.controle_mestre_backend.dto.in.ProdutoRequest;
 import com.github.gerdanyjr.controle_mestre_backend.dto.out.ProdutoResponse;
 import com.github.gerdanyjr.controle_mestre_backend.model.entity.Categoria;
 import com.github.gerdanyjr.controle_mestre_backend.model.entity.Produto;
