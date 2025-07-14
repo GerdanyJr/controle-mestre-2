@@ -1,6 +1,5 @@
 package com.github.gerdanyjr.controle_mestre_backend.model.entity;
 
-import com.github.gerdanyjr.controle_mestre_backend.model.embedded.ProdutoVendaId;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -9,18 +8,13 @@ import java.math.BigDecimal;
 @Table(name = "produto_venda")
 public class ProdutoVenda {
 
-    @EmbeddedId
-    private ProdutoVendaId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
-    @MapsId("produtoId")
     @JoinColumn(name = "produto_id")
     private Produto produto;
-
-    @ManyToOne
-    @MapsId("vendaId")
-    @JoinColumn(name = "venda_id")
-    private Venda venda;
 
     @Column(name = "valor_unitario", nullable = false)
     private BigDecimal valorUnitario;
@@ -31,12 +25,19 @@ public class ProdutoVenda {
     public ProdutoVenda() {
     }
 
-    public ProdutoVenda(ProdutoVendaId id, Produto produto, Venda venda, BigDecimal valorUnitario, int quantidade) {
+    public ProdutoVenda(Long id, Produto produto, BigDecimal valorUnitario, int quantidade) {
         this.id = id;
         this.produto = produto;
-        this.venda = venda;
         this.valorUnitario = valorUnitario;
         this.quantidade = quantidade;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Produto getProduto() {
@@ -45,22 +46,6 @@ public class ProdutoVenda {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
-    }
-
-    public Venda getVenda() {
-        return venda;
-    }
-
-    public void setVenda(Venda venda) {
-        this.venda = venda;
-    }
-
-    public ProdutoVendaId getId() {
-        return id;
-    }
-
-    public void setId(ProdutoVendaId id) {
-        this.id = id;
     }
 
     public BigDecimal getValorUnitario() {
