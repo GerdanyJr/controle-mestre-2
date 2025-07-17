@@ -16,6 +16,7 @@ public class ProdutoVendaBuilder {
     public ProdutoVenda build() {
         return new ProdutoVenda(
                 id,
+                venda,
                 produto,
                 valorUnitario,
                 quantidade
@@ -27,6 +28,11 @@ public class ProdutoVendaBuilder {
         this.venda = null;
         this.valorUnitario = null;
         this.quantidade = null;
+        return this;
+    }
+
+    public ProdutoVendaBuilder id(Long id) {
+        this.id = id;
         return this;
     }
 

@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 public class ProdutoBuilder {
     private Long codigo;
     private String nome;
+    private String ean;
     private Integer quantidadeMinima;
     private String marca;
     private Categoria categoria;
@@ -18,6 +19,7 @@ public class ProdutoBuilder {
         return new Produto(
                 codigo,
                 nome,
+                ean,
                 quantidadeMinima,
                 marca,
                 categoria,
@@ -29,11 +31,17 @@ public class ProdutoBuilder {
     public void reset() {
         this.codigo = null;
         this.nome = null;
+        this.ean = null;
         this.quantidadeMinima = null;
         this.marca = null;
         this.categoria = null;
         this.quantidade = null;
         this.valor = null;
+    }
+
+    public ProdutoBuilder withEan(String ean) {
+        this.ean = ean;
+        return this;
     }
 
     public ProdutoBuilder withCodigo(Long codigo) {

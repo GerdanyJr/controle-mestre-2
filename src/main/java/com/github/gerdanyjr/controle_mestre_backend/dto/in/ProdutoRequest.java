@@ -14,6 +14,10 @@ public record ProdutoRequest(
         @Schema(description = "Nome do produto", example = "Perfume")
         String nome,
 
+        @NotBlank(message = "O ean não pode estar vazio")
+        @Schema(description = "Ean do produto", example = "12345678917")
+        String ean,
+
         @PositiveOrZero(message = "A quantidade mínima não pode ser negativa")
         @Schema(description = "Quantidade mínima do produto", example = "1")
         int quantidadeMinima,

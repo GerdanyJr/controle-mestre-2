@@ -33,7 +33,7 @@ public class FuncionarioController {
     public ResponseEntity<FuncionarioResponse> save(@RequestBody @Valid FuncionarioRequest request) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(funcionarioService.createFuncionario(request));
+                .body(funcionarioService.criar(request));
     }
 
     @GetMapping
@@ -41,9 +41,18 @@ public class FuncionarioController {
             @ApiResponse(responseCode = "200", description = "Funcionários retornados com sucesso")
     })
     public ResponseEntity<List<FuncionarioResponse>> findAll() {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(funcionarioService.findAllFuncionarios());
+        return ResponseEntity.ok(funcionarioService.buscarTodos());
+    }
+
+    @GetMapping("/{cpf}")
+    @Operation(description = "Busca um funcionário por id", responses = {
+            @ApiResponse(responseCode = "200", description = "Funcionários retornados com sucesso")
+    })
+    public ResponseEntity<FuncionarioResponse> findByCpf(
+            @PathVariable
+            @Parameter(description = "CPF a ser buscado", example = "12345678910") String cpf
+    ) {
+        return ResponseEntity.ok(funcionarioService.buscarPorCpf(cpf));
     }
 
     @DeleteMapping("/{id}")
@@ -54,7 +63,7 @@ public class FuncionarioController {
     public ResponseEntity<FuncionarioResponse> delete(
             @PathVariable @Parameter(description = "Id do funcionário a ser deletado") Long id
     ) {
-        funcionarioService.deleteFuncionario(id);
+        funcionarioService.deletar(id);
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)
                 .build();

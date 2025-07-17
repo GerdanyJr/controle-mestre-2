@@ -32,7 +32,7 @@ public class ProdutoController {
     public ResponseEntity<ProdutoResponse> cadastrarProduto(@RequestBody @Valid ProdutoRequest request) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(produtoService.create(request));
+                .body(produtoService.criar(request));
     }
 
     @GetMapping
@@ -40,7 +40,21 @@ public class ProdutoController {
             @ApiResponse(responseCode = "200", description = "Produtos retornados com sucesso")
     })
     public ResponseEntity<List<ProdutoResponse>> listarProdutos() {
-        return ResponseEntity.ok(produtoService.findAll());
+        return ResponseEntity
+                .ok(produtoService.buscarTodos());
+    }
+
+    @GetMapping("/{id}")
+    @Operation(description = "Buscar produto por id", responses = {
+            @ApiResponse(responseCode = "200", description = "Produto retornado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Produto não encontrado")
+    })
+    public ResponseEntity<ProdutoResponse> buscarProdutoPorId(
+            @PathVariable
+            @Parameter(description = "Id do produto a ser buscado", example = "1")
+            Long id
+    ) {
+        return ResponseEntity.ok(produtoService.buscarPorId(id));
     }
 
     @DeleteMapping("/{id}")
@@ -51,7 +65,7 @@ public class ProdutoController {
     public ResponseEntity<Void> deletarProduto(
             @PathVariable @Parameter(description = "Id do produto a ser deletado") Long id
     ) {
-        produtoService.delete(id);
+        produtoService.deletar(id);
         return ResponseEntity
                 .noContent()
                 .build();

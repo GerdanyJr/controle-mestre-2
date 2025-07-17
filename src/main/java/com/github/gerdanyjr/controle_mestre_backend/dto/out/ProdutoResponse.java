@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 @Builder
 public record ProdutoResponse(
         @Schema(description = "Codigo do produto", example = "12345678") Long codigo,
+        @Schema(description = "Código ean", example = "12345678910") String ean,
         @Schema(description = "Nome do produto", example = "Perfume") String nome,
         @Schema(description = "Quantidade mínima do produto", example = "1") int quantidadeMinima,
         @Schema(description = "Marca do produto", example = "Avon") String marca,

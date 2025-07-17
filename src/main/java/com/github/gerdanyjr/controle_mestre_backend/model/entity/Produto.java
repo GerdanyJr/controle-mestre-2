@@ -11,6 +11,9 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
 
+    @Column(name = "ean", length = 11, nullable = false, unique = true)
+    private String ean;
+
     @Column(name = "nome", length = 50, nullable = false)
     private String nome;
 
@@ -32,6 +35,7 @@ public class Produto {
     public Produto(
             Long codigo,
             String nome,
+            String ean,
             int quantidadeMnima,
             String marca,
             Categoria categoria,
@@ -40,6 +44,7 @@ public class Produto {
     ) {
         this.codigo = codigo;
         this.nome = nome;
+        this.ean = ean;
         this.quantidadeMnima = quantidadeMnima;
         this.marca = marca;
         this.categoria = categoria;
@@ -104,5 +109,13 @@ public class Produto {
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
+    }
+
+    public String getEan() {
+        return ean;
+    }
+
+    public void setEan(String ean) {
+        this.ean = ean;
     }
 }

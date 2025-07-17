@@ -38,6 +38,8 @@ public class VendaAdapter {
                 .builder()
                 .id(venda.getId())
                 .total(venda.getTotal())
+                .funcionarioId(venda.getFuncionario().getId())
+                .clienteId(venda.getCliente().getId())
                 .produtos(produtosVenda)
                 .build();
     }

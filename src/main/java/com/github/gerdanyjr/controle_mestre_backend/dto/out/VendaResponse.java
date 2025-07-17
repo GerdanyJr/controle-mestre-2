@@ -14,6 +14,12 @@ public record VendaResponse(
         @Schema(description = "Valor total em R$ da venda", example = "22.60")
         BigDecimal total,
 
+        @Schema(description = "Id do cliente que comprou", example = "1")
+        Long clienteId,
+
+        @Schema(description = "Id do funcionario que realizou comprou", example = "1")
+        Long funcionarioId,
+
         @Schema(description = "Produtos vendidos", example = "[{\"id\": 1, \"quantidade\": 2}, {\"id\": 2, \"quantidade\": 1}]")
         List<ProdutoVendaResponse> produtos
 ) {

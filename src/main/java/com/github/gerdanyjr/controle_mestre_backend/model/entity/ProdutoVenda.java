@@ -16,6 +16,10 @@ public class ProdutoVenda {
     @JoinColumn(name = "produto_id")
     private Produto produto;
 
+    @ManyToOne
+    @JoinColumn(name = "venda_id")
+    private Venda venda;
+
     @Column(name = "valor_unitario", nullable = false)
     private BigDecimal valorUnitario;
 
@@ -25,11 +29,20 @@ public class ProdutoVenda {
     public ProdutoVenda() {
     }
 
-    public ProdutoVenda(Long id, Produto produto, BigDecimal valorUnitario, int quantidade) {
+    public ProdutoVenda(Long id, Venda venda, Produto produto, BigDecimal valorUnitario, int quantidade) {
         this.id = id;
+        this.venda = venda;
         this.produto = produto;
         this.valorUnitario = valorUnitario;
         this.quantidade = quantidade;
+    }
+
+    public Venda getVenda() {
+        return venda;
+    }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
     }
 
     public Long getId() {

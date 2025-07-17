@@ -16,7 +16,15 @@ public class Venda {
 
     private LocalDate data;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id")
+    private Funcionario funcionario;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "venda")
     private List<ProdutoVenda> produtos;
 
     private BigDecimal total;
@@ -24,11 +32,29 @@ public class Venda {
     public Venda() {
     }
 
-    public Venda(Long id, LocalDate data, List<ProdutoVenda> produtos, BigDecimal total) {
+    public Venda(Long id, LocalDate data, Cliente cliente, Funcionario funcionario, List<ProdutoVenda> produtos, BigDecimal total) {
         this.id = id;
         this.data = data;
+        this.cliente = cliente;
+        this.funcionario = funcionario;
         this.produtos = produtos;
         this.total = total;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public Long getId() {
